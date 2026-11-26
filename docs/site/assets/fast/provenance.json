@@ -3,8 +3,8 @@
     "source": "assets/features/animation-ronin-stow-v1/colored.glb",
     "preview": "assets/fast/animation-ronin-stow-v1/delivery.glb",
     "original": 5419772,
-    "optimized": 1813104,
-    "transfer": 1124885,
+    "optimized": 1442580,
+    "transfer": 754548,
     "source_sha256": "4d4132e44c980e1383addd446abccaaf65051ea1f2f441b082ea212389f2c217"
   },
   {
@@ -19,8 +19,8 @@
     "source": "assets/features/animation-expert-01-v1/colored.glb",
     "preview": "assets/fast/animation-expert-01-v1/delivery.glb",
     "original": 16485292,
-    "optimized": 4497064,
-    "transfer": 3704603,
+    "optimized": 1054732,
+    "transfer": 816531,
     "source_sha256": "3d9b7e75e41cfa81076d5dd19326aab2bc48e44f41e0b9e83f753aa1902a7c65"
   },
   {
@@ -35,8 +35,8 @@
     "source": "assets/features/animation-titan-rocket-punch-v1/colored.glb",
     "preview": "assets/fast/animation-titan-rocket-punch-v1/delivery.glb",
     "original": 4700788,
-    "optimized": 1619820,
-    "transfer": 1033928,
+    "optimized": 1268016,
+    "transfer": 681669,
     "source_sha256": "7a67a1080fe2907ddae1193e911fbed43ca791c3c650f3b59de03ee1c037dc84"
   },
   {
@@ -51,40 +51,40 @@
     "source": "assets/features/animation-expert-10-v1/colored.glb",
     "preview": "assets/fast/animation-expert-10-v1/delivery.glb",
     "original": 45515268,
-    "optimized": 13568608,
-    "transfer": 9578446,
+    "optimized": 1186396,
+    "transfer": 956611,
     "source_sha256": "94cea1a7c87de3ec1b410044e306fe959fc22d9f124b12f32556691b439f4182"
   },
   {
     "source": "assets/features/animation-expert-10-v1/gt-animated.glb",
     "preview": "assets/fast/animation-expert-10-v1/reference.glb",
     "original": 16506524,
-    "optimized": 6005728,
-    "transfer": 2372835,
+    "optimized": 868300,
+    "transfer": 611840,
     "source_sha256": "bfdd49889c78f62472ebb609c21311d973d3457e935ecccbb5e676e3ccbdbda0"
   },
   {
     "source": "assets/cases/case-0-sol.glb",
     "preview": "assets/fast/nailong.glb",
     "original": 7146208,
-    "optimized": 6352336,
-    "transfer": 2518036,
+    "optimized": 454800,
+    "transfer": 370037,
     "source_sha256": "cfd793d5b115b8f325cac49556df730d04d37bd025d9019b8ff37fb79383c211"
   },
   {
     "source": "assets/cases/mesh-i2m-expert-03-v1-sol.glb",
     "preview": "assets/fast/ironman.glb",
     "original": 24676644,
-    "optimized": 21934968,
-    "transfer": 8412487,
+    "optimized": 448732,
+    "transfer": 360604,
     "source_sha256": "58039bca3750e270882cd86dba88fd8a7125d1c970b1a02ef6b8b47689609477"
   },
   {
     "source": "assets/cases/mesh-i2m-expert-59-v1-sol.glb",
     "preview": "assets/fast/nier.glb",
     "original": 4242688,
-    "optimized": 3770976,
-    "transfer": 1469422,
+    "optimized": 443632,
+    "transfer": 348878,
     "source_sha256": "90099e8752cb62ab424d433db5244b457ed40e6728f6ef9eac519fd8f1ea4342"
   },
   {

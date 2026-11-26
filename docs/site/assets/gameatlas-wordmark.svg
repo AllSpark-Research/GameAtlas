@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 912 178">
+  <defs>
+    <linearGradient id="ink-face" x1="0" x2="0" y1="0" y2="1">
+      <stop stop-color="#667c9a" />
+      <stop offset=".45" stop-color="#3d5576" />
+      <stop offset="1" stop-color="#253d60" />
+    </linearGradient>
+    <linearGradient id="uv-light" x1="0" x2="0" y1="0" y2="1">
+      <stop stop-color="#ffffff" stop-opacity=".28" />
+      <stop offset="1" stop-color="#163362" stop-opacity=".08" />
+    </linearGradient>
+    <pattern height="32" id="uv-grid" patternUnits="userSpaceOnUse" width="32">
+      <path d="M0 0h16v16H0ZM16 16h16v16H16Z" fill="#d8e2f3" />
+      <path d="M16 0h16v16H16ZM0 16h16v16H0Z" fill="#92acd0" />
+    </pattern>
+    <pattern height="16" id="pixel-grid" patternUnits="userSpaceOnUse" width="16" x="10" y="10">
+      <path d="M0 0H16V16" fill="none" stroke="#e8f0ff" stroke-opacity=".12" stroke-width=".65" />
+    </pattern>
+    <clipPath id="game-shape">
+      <use href="#game-silhouette" />
+    </clipPath>
+    <clipPath id="atlas-shape">
+      <use href="#atlas-silhouette" />
+    </clipPath>
+    <filter height="180%" id="soft-shadow" width="120%" x="-10%" y="-30%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+    <path id="game-silhouette" d="M42 26h16v16h-16zM58 26h16v16h-16zM74 26h16v16h-16zM26 42h16v16h-16zM90 42h16v16h-16zM26 58h16v16h-16zM26 74h16v16h-16zM58 74h16v16h-16zM74 74h16v16h-16zM90 74h16v16h-16zM26 90h16v16h-16zM90 90h16v16h-16zM26 106h16v16h-16zM90 106h16v16h-16zM42 122h16v16h-16zM58 122h16v16h-16zM74 122h16v16h-16zM138 26h16v16h-16zM154 26h16v16h-16zM170 26h16v16h-16zM122 42h16v16h-16zM186 42h16v16h-16zM122 58h16v16h-16zM186 58h16v16h-16zM122 74h16v16h-16zM138 74h16v16h-16zM154 74h16v16h-16zM170 74h16v16h-16zM186 74h16v16h-16zM122 90h16v16h-16zM186 90h16v16h-16zM122 106h16v16h-16zM186 106h16v16h-16zM122 122h16v16h-16zM186 122h16v16h-16zM218 26h16v16h-16zM282 26h16v16h-16zM218 42h16v16h-16zM234 42h16v16h-16zM266 42h16v16h-16zM282 42h16v16h-16zM218 58h16v16h-16zM250 58h16v16h-16zM282 58h16v16h-16zM218 74h16v16h-16zM250 74h16v16h-16zM282 74h16v16h-16zM218 90h16v16h-16zM282 90h16v16h-16zM218 106h16v16h-16zM282 106h16v16h-16zM218 122h16v16h-16zM282 122h16v16h-16zM314 26h16v16h-16zM330 26h16v16h-16zM346 26h16v16h-16zM362 26h16v16h-16zM378 26h16v16h-16zM314 42h16v16h-16zM314 58h16v16h-16zM314 74h16v16h-16zM330 74h16v16h-16zM346 74h16v16h-16zM362 74h16v16h-16zM314 90h16v16h-16zM314 106h16v16h-16zM314 122h16v16h-16zM330 122h16v16h-16zM346 122h16v16h-16zM362 122h16v16h-16zM378 122h16v16h-16z" />
+    <g id="game-cells">
+      <rect height="16" width="16" x="42" y="26" />
+      <rect height="16" width="16" x="58" y="26" />
+      <rect height="16" width="16" x="74" y="26" />
+      <rect height="16" width="16" x="26" y="42" />
+      <rect height="16" width="16" x="90" y="42" />
+      <rect height="16" width="16" x="26" y="58" />
+      <rect height="16" width="16" x="26" y="74" />
+      <rect height="16" width="16" x="58" y="74" />
+      <rect height="16" width="16" x="74" y="74" />
+      <rect height="16" width="16" x="90" y="74" />
+      <rect height="16" width="16" x="26" y="90" />
+      <rect height="16" width="16" x="90" y="90" />
+      <rect height="16" width="16" x="26" y="106" />
+      <rect height="16" width="16" x="90" y="106" />
+      <rect height="16" width="16" x="42" y="122" />
+      <rect height="16" width="16" x="58" y="122" />
+      <rect height="16" width="16" x="74" y="122" />
+      <rect height="16" width="16" x="138" y="26" />
+      <rect height="16" width="16" x="154" y="26" />
+      <rect height="16" width="16" x="170" y="26" />
+      <rect height="16" width="16" x="122" y="42" />
+      <rect height="16" width="16" x="186" y="42" />
+      <rect height="16" width="16" x="122" y="58" />
+      <rect height="16" width="16" x="186" y="58" />
+      <rect height="16" width="16" x="122" y="74" />
+      <rect height="16" width="16" x="138" y="74" />
+      <rect height="16" width="16" x="154" y="74" />
+      <rect height="16" width="16" x="170" y="74" />
+      <rect height="16" width="16" x="186" y="74" />
+      <rect height="16" width="16" x="122" y="90" />
+      <rect height="16" width="16" x="186" y="90" />
+      <rect height="16" width="16" x="122" y="106" />
+      <rect height="16" width="16" x="186" y="106" />
+      <rect height="16" width="16" x="122" y="122" />
+      <rect height="16" width="16" x="186" y="122" />
+      <rect height="16" width="16" x="218" y="26" />
+      <rect height="16" width="16" x="282" y="26" />
+      <rect height="16" width="16" x="218" y="42" />
+      <rect height="16" width="16" x="234" y="42" />
+      <rect height="16" width="16" x="266" y="42" />
+      <rect height="16" width="16" x="282" y="42" />
+      <rect height="16" width="16" x="218" y="58" />
+      <rect height="16" width="16" x="250" y="58" />
+      <rect height="16" width="16" x="282" y="58" />
+      <rect height="16" width="16" x="218" y="74" />
+      <rect height="16" width="16" x="250" y="74" />
+      <rect height="16" width="16" x="282" y="74" />
+      <rect height="16" width="16" x="218" y="90" />
+      <rect height="16" width="16" x="282" y="90" />
+      <rect height="16" width="16" x="218" y="106" />
+      <rect height="16" width="16" x="282" y="106" />
+      <rect height="16" width="16" x="218" y="122" />
+      <rect height="16" width="16" x="282" y="122" />
+      <rect height="16" width="16" x="314" y="26" />
+      <rect height="16" width="16" x="330" y="26" />
+      <rect height="16" width="16" x="346" y="26" />
+      <rect height="16" width="16" x="362" y="26" />
+      <rect height="16" width="16" x="378" y="26" />
+      <rect height="16" width="16" x="314" y="42" />
+      <rect height="16" width="16" x="314" y="58" />
+      <rect height="16" width="16" x="314" y="74" />
+      <rect height="16" width="16" x="330" y="74" />
+      <rect height="16" width="16" x="346" y="74" />
+      <rect height="16" width="16" x="362" y="74" />
+      <rect height="16" width="16" x="314" y="90" />
+      <rect height="16" width="16" x="314" y="106" />
+      <rect height="16" width="16" x="314" y="122" />
+      <rect height="16" width="16" x="330" y="122" />
+      <rect height="16" width="16" x="346" y="122" />
+      <rect height="16" width="16" x="362" y="122" />
+      <rect height="16" width="16" x="378" y="122" />
+    </g>
+    <path id="atlas-silhouette" d="M426 26h16v16h-16zM442 26h16v16h-16zM458 26h16v16h-16zM410 42h16v16h-16zM474 42h16v16h-16zM410 58h16v16h-16zM474 58h16v16h-16zM410 74h16v16h-16zM426 74h16v16h-16zM442 74h16v16h-16zM458 74h16v16h-16zM474 74h16v16h-16zM410 90h16v16h-16zM474 90h16v16h-16zM410 106h16v16h-16zM474 106h16v16h-16zM410 122h16v16h-16zM474 122h16v16h-16zM506 26h16v16h-16zM522 26h16v16h-16zM538 26h16v16h-16zM554 26h16v16h-16zM570 26h16v16h-16zM538 42h16v16h-16zM538 58h16v16h-16zM538 74h16v16h-16zM538 90h16v16h-16zM538 106h16v16h-16zM538 122h16v16h-16zM602 26h16v16h-16zM602 42h16v16h-16zM602 58h16v16h-16zM602 74h16v16h-16zM602 90h16v16h-16zM602 106h16v16h-16zM602 122h16v16h-16zM618 122h16v16h-16zM634 122h16v16h-16zM650 122h16v16h-16zM666 122h16v16h-16zM714 26h16v16h-16zM730 26h16v16h-16zM746 26h16v16h-16zM698 42h16v16h-16zM762 42h16v16h-16zM698 58h16v16h-16zM762 58h16v16h-16zM698 74h16v16h-16zM714 74h16v16h-16zM730 74h16v16h-16zM746 74h16v16h-16zM762 74h16v16h-16zM698 90h16v16h-16zM762 90h16v16h-16zM698 106h16v16h-16zM762 106h16v16h-16zM698 122h16v16h-16zM762 122h16v16h-16zM810 26h16v16h-16zM826 26h16v16h-16zM842 26h16v16h-16zM858 26h16v16h-16zM794 42h16v16h-16zM794 58h16v16h-16zM810 74h16v16h-16zM826 74h16v16h-16zM842 74h16v16h-16zM858 90h16v16h-16zM858 106h16v16h-16zM794 122h16v16h-16zM810 122h16v16h-16zM826 122h16v16h-16zM842 122h16v16h-16z" />
+    <g id="atlas-cells">
+      <rect height="16" width="16" x="426" y="26" />
+      <rect height="16" width="16" x="442" y="26" />
+      <rect height="16" width="16" x="458" y="26" />
+      <rect height="16" width="16" x="410" y="42" />
+      <rect height="16" width="16" x="474" y="42" />
+      <rect height="16" width="16" x="410" y="58" />
+      <rect height="16" width="16" x="474" y="58" />
+      <rect height="16" width="16" x="410" y="74" />
+      <rect height="16" width="16" x="426" y="74" />
+      <rect height="16" width="16" x="442" y="74" />
+      <rect height="16" width="16" x="458" y="74" />
+      <rect height="16" width="16" x="474" y="74" />
+      <rect height="16" width="16" x="410" y="90" />
+      <rect height="16" width="16" x="474" y="90" />
+      <rect height="16" width="16" x="410" y="106" />
+      <rect height="16" width="16" x="474" y="106" />
+      <rect height="16" width="16" x="410" y="122" />
+      <rect height="16" width="16" x="474" y="122" />
+      <rect height="16" width="16" x="506" y="26" />
+      <rect height="16" width="16" x="522" y="26" />
+      <rect height="16" width="16" x="538" y="26" />
+      <rect height="16" width="16" x="554" y="26" />
+      <rect height="16" width="16" x="570" y="26" />
+      <rect height="16" width="16" x="538" y="42" />
+      <rect height="16" width="16" x="538" y="58" />
+      <rect height="16" width="16" x="538" y="74" />
+      <rect height="16" width="16" x="538" y="90" />
+      <rect height="16" width="16" x="538" y="106" />
+      <rect height="16" width="16" x="538" y="122" />
+      <rect height="16" width="16" x="602" y="26" />
+      <rect height="16" width="16" x="602" y="42" />
+      <rect height="16" width="16" x="602" y="58" />
+      <rect height="16" width="16" x="602" y="74" />
+      <rect height="16" width="16" x="602" y="90" />
+      <rect height="16" width="16" x="602" y="106" />
+      <rect height="16" width="16" x="602" y="122" />
+      <rect height="16" width="16" x="618" y="122" />
+      <rect height="16" width="16" x="634" y="122" />
+      <rect height="16" width="16" x="650" y="122" />
+      <rect height="16" width="16" x="666" y="122" />
+      <rect height="16" width="16" x="714" y="26" />
+      <rect height="16" width="16" x="730" y="26" />
+      <rect height="16" width="16" x="746" y="26" />
+      <rect height="16" width="16" x="698" y="42" />
+      <rect height="16" width="16" x="762" y="42" />
+      <rect height="16" width="16" x="698" y="58" />
+      <rect height="16" width="16" x="762" y="58" />
+      <rect height="16" width="16" x="698" y="74" />
+      <rect height="16" width="16" x="714" y="74" />
+      <rect height="16" width="16" x="730" y="74" />
+      <rect height="16" width="16" x="746" y="74" />
+      <rect height="16" width="16" x="762" y="74" />
+      <rect height="16" width="16" x="698" y="90" />
+      <rect height="16" width="16" x="762" y="90" />
+      <rect height="16" width="16" x="698" y="106" />
+      <rect height="16" width="16" x="762" y="106" />
+      <rect height="16" width="16" x="698" y="122" />
+      <rect height="16" width="16" x="762" y="122" />
+      <rect height="16" width="16" x="810" y="26" />
+      <rect height="16" width="16" x="826" y="26" />
+      <rect height="16" width="16" x="842" y="26" />
+      <rect height="16" width="16" x="858" y="26" />
+      <rect height="16" width="16" x="794" y="42" />
+      <rect height="16" width="16" x="794" y="58" />
+      <rect height="16" width="16" x="810" y="74" />
+      <rect height="16" width="16" x="826" y="74" />
+      <rect height="16" width="16" x="842" y="74" />
+      <rect height="16" width="16" x="858" y="90" />
+      <rect height="16" width="16" x="858" y="106" />
+      <rect height="16" width="16" x="794" y="122" />
+      <rect height="16" width="16" x="810" y="122" />
+      <rect height="16" width="16" x="826" y="122" />
+      <rect height="16" width="16" x="842" y="122" />
+    </g>
+    <g id="word-silhouette">
+      <use href="#game-cells" />
+      <use href="#atlas-cells" />
+    </g>
+  </defs>
+  <g fill="#172f52" filter="url(#soft-shadow)" opacity=".15" transform="translate(8 22)">
+    <use href="#word-silhouette" />
+  </g>
+  <g fill="#263c5c" transform="translate(8 12)">
+    <use href="#word-silhouette" />
+  </g>
+  <g fill="#324d70" transform="translate(6 9)">
+    <use href="#word-silhouette" />
+  </g>
+  <g fill="#435f83" transform="translate(4 6)">
+    <use href="#word-silhouette" />
+  </g>
+  <g fill="#526c8e" transform="translate(2 3)">
+    <use href="#word-silhouette" />
+  </g>
+  <g fill="url(#ink-face)">
+    <use href="#game-cells" />
+  </g>
+  <g clip-path="url(#game-shape)">
+    <path d="M0 0H912V160H0Z" fill="url(#pixel-grid)" />
+    <path d="M0 26H410V28H0Z" fill="#d4e3f4" opacity=".65" />
+  </g>
+  <g fill="url(#uv-grid)">
+    <use href="#atlas-cells" />
+  </g>
+  <g clip-path="url(#atlas-shape)">
+    <path d="M400 0H912V160H400Z" fill="url(#uv-light)" />
+    <path d="M402 26H912V28H402Z" fill="#fff" opacity=".6" />
+    <path d="M411 86H490M585 25V142M703 65H790" fill="none" opacity=".8" stroke="#f5f8ff" stroke-dasharray="3 3" stroke-width="1.2" />
+  </g>
+</svg>

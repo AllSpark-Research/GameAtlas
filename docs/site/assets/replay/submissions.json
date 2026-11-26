@@ -52,7 +52,7 @@
       "sensor_fit": "HORIZONTAL"
     },
     "evaluationId": "f95fc530eab84c87913ed5e4c2be1d0c",
-    "image": "assets/replay/submission-1.png"
+    "image": "assets/replay/submission-1.webp"
   },
   {
     "index": 2,
@@ -107,7 +107,7 @@
       "sensor_fit": "HORIZONTAL"
     },
     "evaluationId": "1bb3307427734cf9b0d1e77c8eb3d6f1",
-    "image": "assets/replay/submission-2.png"
+    "image": "assets/replay/submission-2.webp"
   },
   {
     "index": 3,
@@ -162,7 +162,7 @@
       "sensor_fit": "HORIZONTAL"
     },
     "evaluationId": "6f8f90021a0f4b5ca67d37278b00e77b",
-    "image": "assets/replay/submission-3.png"
+    "image": "assets/replay/submission-3.webp"
   },
   {
     "index": 4,
@@ -217,7 +217,7 @@
       "sensor_fit": "HORIZONTAL"
     },
     "evaluationId": "df101e791fe34d94a5e3920659ad6322",
-    "image": "assets/replay/submission-4.png"
+    "image": "assets/replay/submission-4.webp"
   },
   {
     "index": 5,
@@ -272,6 +272,6 @@
       "sensor_fit": "HORIZONTAL"
     },
     "evaluationId": "72c7605d43d145248e7a3ccd53f97f12",
-    "image": "assets/replay/submission-5.png"
+    "image": "assets/replay/submission-5.webp"
   }
 ]

@@ -16,7 +16,7 @@ const b2Root = 'assets/replay/b2/';
 const cases = [
   {
     label: 'Camera · Sol', title: 'Living & dining room', model: 'GPT-6.1-Sol', brand: 'openai',
-    reference: 'assets/replay/reference.png', submissions: camera,
+    reference: 'assets/replay/reference.webp', submissions: camera,
     notes: ['Match shelf corners and chair feet','Use chair silhouettes to refine the fit','Align the shelf edges','Adjust the pose using chair feet','Set camera height and remove roll'],
     regions: [[.16,.27,.76,.60],[.50,.49,.45,.38],[.15,.35,.21,.38],[.55,.73,.20,.12],[.15,.35,.21,.38]],
     positions: [[115,180],[360,335],[278,265],[300,510],[278,265]]

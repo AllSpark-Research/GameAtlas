@@ -1,11 +1,13 @@
 # GameAtlas project website
 
-The [live website](https://kylin1112.github.io/GameAtlas/) includes the interactive 3D showcases, task browser and leaderboard.
+The [project website](https://kylin1112.github.io/GameAtlas/) includes the interactive showcases, task browser and leaderboard. From a sparse checkout, run `git sparse-checkout add docs/site .github` first.
 
-To preview it locally, run the following from a full checkout of the repository. If you used the sparse checkout in the main README, first run `git sparse-checkout add docs/site`.
+To preview the same build that GitHub Pages serves, run these commands from the repository root. The build uses Python's standard library and writes to a new directory.
 
 ```bash
-python3 -m http.server 8000 --directory docs/site
+site_dir="$(mktemp -d)/gameatlas"
+python3 .github/build_pages.py "$site_dir"
+python3 -m http.server 8000 --directory "$site_dir"
 ```
 
-Open [localhost:8000](http://localhost:8000/). For a public repository with GitHub Pages enabled, the Pages workflow publishes this directory when the site changes on `main`. Large scene-layout models are served from the same Git commit as the deployed page. Local previews read those files from `case-assets/`.
+Open [localhost:8000](http://localhost:8000/). All website assets are served from that directory. The build bundles the homepage styles and startup scripts into content-hashed files. GitHub Pages publishes this build when the website changes on the public repository's `main` branch.

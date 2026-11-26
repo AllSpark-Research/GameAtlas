@@ -13,7 +13,7 @@ const models=window.GAMEATLAS_LEADERBOARD;
 function modelIdentity(name){
  const brands=[[/^GPT-/,'openai'],[/^Gemini/,'gemini'],[/^Kimi/,'kimi'],[/^DeepSeek/,'deepseek'],[/^(Qwen|Flash-Next)/,'qwen'],[/^GLM/,'zai'],[/^(Doubao|Seed)/,'doubao'],[/^Grok/,'grok'],[/^Claude/,'claude'],[/^HY/,'hunyuan']];
  const brand=brands.find(([pattern])=>pattern.test(name))?.[1];
- return `<span class="model-identity">${brand?`<img class="model-brand" src="brand/${brand}.svg?v=12" alt="" width="22" height="22"/>`:''}<span>${name}</span></span>`;
+ return `<span class="model-identity">${brand?`<img class="model-brand" loading="lazy" decoding="async" src="brand/${brand}.svg?v=12" alt="" width="22" height="22"/>`:''}<span>${name}</span></span>`;
 }
 
 let sortColumn='final',ascending=true,rankMetric=0;

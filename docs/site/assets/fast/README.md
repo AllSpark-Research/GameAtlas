@@ -1,6 +1,6 @@
 # Interactive showcase previews
 
-Optimized presentation assets; original benchmark deliveries are unchanged. Preview GLBs retain geometry and skeletons, quantize attributes, resample animation at 30 fps and resize textures to WebP (maximum 1024 px). Gzip files are decompressed in the viewer; parsed assets are cached across carousel switches. Motion bounds are measured offline over 61 frames from both delivery and GT.
+The project website uses lightweight meshes and WebP textures for interactive viewing. Larger preview meshes are simplified for display. Animation previews retain the archived keyframes and timing. Scores are computed on the original deliveries. The viewer decompresses gzip assets and caches them across carousel switches. Motion bounds were measured over 61 frames from the delivery and reference.
 
 Animation scores match the archived November 13 Sol artifacts, not the latest leaderboard run: Ronin 55.507749; Sniper 24.251987; Titan 58.394248; DRAGO 22.047777.
 
