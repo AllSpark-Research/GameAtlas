@@ -227,7 +227,6 @@ body {
 .detail-first,
 .detail-rule,
 .detail-caption,
-.detail-provenance,
 .detail-note {
   color: var(--ink-muted);
 }
