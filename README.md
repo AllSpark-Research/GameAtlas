@@ -3,16 +3,16 @@
 <p align="center"><strong>Bringing LLM Agents Back to Basics in Visual Coding and Spatial Reasoning for Game Development</strong></p>
 <p align="center">AllSpark Team</p>
 <p align="center">
-  <a href="https://kylin1112.github.io/GameAtlas/">Project website</a> ·
+  <a href="https://allspark-research.github.io/GameAtlas/">Project website</a> ·
   <a href="docs/GameAtlas.pdf">Paper</a> ·
   <a href="https://huggingface.co/datasets/AllSpark-Research/GameAtlas">Dataset</a> ·
-  <a href="https://kylin1112.github.io/GameAtlas/#leaderboard">Leaderboard</a> ·
+  <a href="https://allspark-research.github.io/GameAtlas/#leaderboard">Leaderboard</a> ·
   <a href="#quickstart">Quickstart</a>
 </p>
 
 How well can a coding agent infer shape, motion and spatial relationships from visual references and reproduce them through code? **GameAtlas** measures these capabilities with **91 tasks across eight disciplines** of professional game development. Each task isolates a production decision and evaluates the delivered artifact with expert-defined, executable checks. Agents can inspect their work, request feedback and revise it before final evaluation. Scoring requires no LLM judge.
 
-[![GameAtlas task overview. The first row follows image-to-mesh, retopology, UV unwrapping and animation. The second follows scene layout, camera reconstruction, rendering and PSD composition.](docs/assets/task-overview.png)](https://kylin1112.github.io/GameAtlas/#showcase)
+[![GameAtlas task overview. The first row follows image-to-mesh, retopology, UV unwrapping and animation. The second follows scene layout, camera reconstruction, rendering and PSD composition.](docs/assets/task-overview.png)](https://allspark-research.github.io/GameAtlas/#showcase)
 
 ## Task collection
 
@@ -29,11 +29,11 @@ Across the eight disciplines, agents infer shape from images, preserve geometry 
 | Rendering | 3 | Implement or repair a renderer to reproduce the lighting and appearance in the target views. |
 | PSD composition | 2 | Adapt layered artwork to a new aspect ratio while preserving readability, spatial relationships and editable layers. |
 
-[Interactive task examples](https://kylin1112.github.io/GameAtlas/#workflow-title) · [Task packages and file formats](docs/dataset.md)
+[Interactive task examples](https://allspark-research.github.io/GameAtlas/#workflow-title) · [Task packages and file formats](docs/dataset.md)
 
 ## Evaluation and results
 
-GameAtlas records the first submission and the final delivery. During a run, the agent can call `submit_score` for task-specific feedback within its submission budget. The verifier grades the files the agent leaves at delivery. Among the 17 evaluated models, GPT-6-Astra achieves the highest final weighted score, improving from **55.95 to 69.10** out of 100. The [leaderboard](https://kylin1112.github.io/GameAtlas/#leaderboard) includes results by discipline. The [evaluation protocol](docs/evaluation.md) explains how online feedback and final grading work.
+GameAtlas records the first submission and the final delivery. During a run, the agent can call `submit_score` for task-specific feedback within its submission budget. The verifier grades the files the agent leaves at delivery. Among the 17 evaluated models, GPT-6-Astra achieves the highest final weighted score, improving from **55.95 to 69.10** out of 100. The [leaderboard](https://allspark-research.github.io/GameAtlas/#leaderboard) includes results by discipline. The [evaluation protocol](docs/evaluation.md) explains how online feedback and final grading work.
 
 ## Quickstart
 

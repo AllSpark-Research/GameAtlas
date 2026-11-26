@@ -1,6 +1,6 @@
 # GameAtlas project website
 
-The [project website](https://kylin1112.github.io/GameAtlas/) includes the interactive showcases, task browser and leaderboard. From a sparse checkout, run `git sparse-checkout add docs/site .github` first.
+The [project website](https://allspark-research.github.io/GameAtlas/) includes the interactive showcases, task browser and leaderboard. From a sparse checkout, run `git sparse-checkout add docs/site .github` first.
 
 To preview the same build that GitHub Pages serves, run these commands from the repository root. The build uses Python's standard library and writes to a new directory.
 
