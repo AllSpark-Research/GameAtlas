@@ -61,10 +61,10 @@ function carousel(kind){const host=document.querySelector(kind==='animation'?'#f
   const viewportHeight = entry.rootBounds?.height || window.innerHeight;
   const height = Math.min(entry.boundingClientRect.height, viewportHeight);
   visible = entry.isIntersecting && entry.intersectionRect.height >= height * .75;
-  stageInView = entry.isIntersecting && entry.intersectionRect.height >= height * .45;
+  stageInView = entry.isIntersecting;
   if (stageInView && !document.hidden) startLiveView();
   restart();
- }, {threshold: [0, .45, .75, 1]}).observe(stage);
+ }, {threshold: [0, .75, 1]}).observe(stage);
  stage.addEventListener('pointerdown', startLiveView);
  stage.addEventListener('focusin', startLiveView);
  let ctx, gtCtx;
