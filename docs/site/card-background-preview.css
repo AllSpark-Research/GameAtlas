@@ -49,15 +49,3 @@
   visibility: hidden;
 }
 .behavior-panel:empty { min-height: min(40vw, 550px); }
-
-.feature-poster {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-.feature-card[data-interactive="true"] .feature-poster {
-  visibility: hidden;
-}

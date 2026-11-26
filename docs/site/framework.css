@@ -70,9 +70,72 @@
 @media(max-width:440px){#atlas-browser .atlas-cases{grid-template-columns:1fr}#atlas-browser .atlas-case-image{aspect-ratio:16/10}}
 @media(prefers-reduced-motion:reduce){#atlas-browser *,#atlas-browser *::before{animation:none!important;transition:none!important}}
 
-.category-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 18px 0; }
-.category-toolbar .score-legend { margin: 0; }
-.category-sort-actions { display: flex; flex: none; gap: 8px; color: #405775; font-size: 12px; font-weight: 600; }
-.category-score { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-.category-sort-actions button { padding: 4px 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: right; white-space: nowrap; cursor: pointer; }
+/* Keep each score label on the same right edge as its numeric values.
+   The direction indicator sits in the gutter so sorting never shifts a label. */
+.weighted-board button:is([data-sort="first"], [data-sort="final"]),
+.category-sort-actions button {
+  position: relative;
+}
+.weighted-board :is([data-sort="first"], [data-sort="final"]) .sort-indicator,
+.category-sort-actions button span {
+  position: absolute;
+  left: calc(100% + 2px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.category-chart {
+  --model-column: 175px;
+  --score-columns: 108px;
+}
+.category-bar-row {
+  grid-template-columns: var(--model-column) minmax(0, 1fr) var(--score-columns);
+}
+.category-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--score-columns);
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+}
+.category-toolbar .score-legend { margin: 0; flex-wrap: wrap; }
+.category-sort-actions, .category-score {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: baseline;
+  justify-items: end;
+  gap: 8px;
+  padding-inline-end: 10px;
+}
+.category-score :is(small, strong) { font-size: 12px; line-height: 1.4; }
+.category-sort-actions { color: #405775; font-size: 12px; font-weight: 600; }
+.category-sort-actions button {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: right;
+  white-space: nowrap;
+  cursor: pointer;
+}
 .category-sort-actions button[aria-pressed="true"] { color: #304e79; }
+
+@media (max-width: 720px) {
+  .weighted-board table { min-width: 0; }
+  .weighted-board thead th, .weighted-board tbody td { padding-inline: 5px; }
+  .weighted-board th:first-child { width: 26px; }
+  .weighted-board th:nth-child(2) { width: 39%; min-width: 0; }
+  .weighted-board tbody td:nth-child(2) { min-width: 0; white-space: normal; }
+  .weighted-board .model-identity { overflow-wrap: anywhere; }
+  .weighted-board tbody td:nth-child(3) { padding-inline: 6px; }
+  .weighted-board th:nth-child(n+4) { width: 54px; }
+  .weighted-board thead th:nth-child(n+4),
+  .weighted-board tbody td:nth-child(n+4) { padding-inline: 1px 12px; }
+}
+@media (max-width: 600px) {
+  .category-chart { --model-column: 115px; --score-columns: 90px; }
+}
+@media (max-width: 360px) {
+  .category-chart { --model-column: 98px; }
+}
