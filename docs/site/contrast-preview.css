@@ -227,13 +227,12 @@ body {
 .detail-first,
 .detail-rule,
 .detail-caption,
-.detail-metric p,
 .detail-provenance,
 .detail-note {
   color: var(--ink-muted);
 }
 
-.detail-metric.loss summary b,
+.detail-metric.loss b,
 .detail-check {
   color: #805240;
 }

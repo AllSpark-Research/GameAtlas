@@ -51,8 +51,14 @@ function score(){
  $('#detail-source').innerHTML=`${esc(cases[index].id)}<br>${record.repeat ? 'Repeat '+esc(record.repeat) : 'Run '+esc(record.run)} · ${sample ? 'Submission '+sample.submission : 'Final delivery'}<br>${sample ? 'Evaluation '+esc(sample.evaluationId) : record.repeat ? 'Terminal state: '+esc(record.terminal) : 'Score for this delivery.'}${!sample && final.job ? `<br><a href="${esc(final.job)}" target="_blank" rel="noopener">Public score record ↗</a>` : ''}`;
 }
 function evaluation(e){if(!e){$('.detail-report').innerHTML=`<p class="detail-rule">${Number.isFinite(selected().score)?'A score is recorded; detailed evidence is not available for this delivery.':'This run has not completed. No score has been assigned.'}</p>`;return;}
- const metrics=(e.metrics||[]).map(m=>`<details class="detail-metric"><summary><span>${esc(label(m.id))}</span><b>${num(m.score)}${Number.isFinite(m.maximum)?` <small>/ 100</small>`:''}</b></summary><div class="detail-meter"><i style="--score:${Math.max(0,Math.min(100,m.score||0))}%"></i></div><p>${Number.isFinite(m.weight)?`Weight ${(m.weight*100).toFixed(0)}%. `:''}${m.role==='multiplier'?'Applied as a stability multiplier. ':''}${Number.isFinite(m.deduction)?`Lost ${num(m.deduction)} points${Number.isFinite(m.maximum)?` (maximum ${num(m.maximum)})`:''}.`:'Measured quality for this dimension; see the scoring formula above.'}</p></details>`).join('');
- const ds=(e.deductions||[]).map(d=>`<details class="detail-metric loss"><summary><span>${esc(label(d.id))}</span><b>${d.points>0?'−':''}${num(d.points)}</b></summary><p>${esc(d.reason||(d.points>0?'Measured deduction applied to this delivery.':'No deduction was applied.'))}</p></details>`).join('');
+ const metrics = (e.metrics || []).map(metric => {
+  const scale = Number.isFinite(metric.maximum) ? ' <small>/ 100</small>' : '';
+  return `<div class="detail-metric"><span>${esc(label(metric.id))}</span><b>${num(metric.score)}${scale}</b></div>`;
+ }).join('');
+ const ds = (e.deductions || []).map(deduction => {
+  const sign = deduction.points > 0 ? '−' : '';
+  return `<div class="detail-metric loss"><span>${esc(label(deduction.id))}</span><b>${sign}${num(deduction.points)}</b></div>`;
+ }).join('');
  $('.detail-report').innerHTML=`<p class="detail-rule">${esc(e.summary||'Objective measurements from this delivery.')}</p>${metrics}${ds?`<section class="detail-deductions"><h3>Point deductions</h3>${ds}</section>`:''}${(e.checks||[]).map(x=>`<p class="detail-check">${esc(x)}</p>`).join('')}${rung?`<p class="detail-note">Details: ${esc(rung)}. Final score above reflects the recorded task result.</p>`:''}`;
 }
 function modelButtons(){const s=cases[index];$('.detail-models').innerHTML=data.models.map(m=>`<button data-model="${esc(m.id)}" aria-pressed="${model===m.id}">${modelIdentity(esc(m.name))}<b>${num(data.tasks[s.id]?.[m.id]?.examples?.[model===m.id ? exampleIndex : 0]?.score ?? (model===m.id ? selected().score : data.tasks[s.id]?.[m.id]?.score))}</b></button>`).join('');$('.detail-models').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(model===b.dataset.model)return;model=b.dataset.model;exampleIndex=0;rung=null;modelButtons();score();media()});}
