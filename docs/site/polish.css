@@ -118,3 +118,5 @@
 
 #home h2 { max-width: 38em; margin-inline: auto; text-wrap: balance; }
 .project-affiliations span { margin-inline: .35em; }
+
+#atlas-browser .atlas-case-image picture { display: contents; }

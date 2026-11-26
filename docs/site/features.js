@@ -30,27 +30,6 @@ function scoreCard(card,id){
  const r=window.GAMEATLAS_CASE_DATA.tasks[id][model],name=window.GAMEATLAS_CASE_DATA.models.find(m=>m.id===model).name;
  card.dataset.previewCase=id;card.querySelector('.feature-model').innerHTML=modelIdentity(name);
  card.querySelector('.feature-score').innerHTML=`${item.display.submission ? r.examples[0].score.toFixed(1) : Number.isFinite(r.score)?r.score.toFixed(1):'—'} <small>/ 100${item.display.submission ? " · Submission 1" : ""}</small>`;card.querySelectorAll('.inspect-case').forEach(b=>{b.setAttribute('aria-label',`Inspect ${item.case}: ${name}`);b.onclick=()=>{card.dataset.inspecting='true';window.openAtlasCase(i,b,decks[card.querySelector('[data-carousel]').dataset.carousel].map(([id])=>cases.findIndex(c=>c.id===id)))}})}
-// Only warm the files for a visible card, using the same URLs and request modes as the viewer.
-const warmed = new Set();
-function warmFirstSlide(kind, task) {
- const {display} = cases.find(item => item.id === task);
- const root = 'case-assets/' + display.model + '/' + task + '/';
- const files = {
-  animation: [root + display.showcaseModelFile, 'assets/fast/showcase/' + task + '/reference.glb.gz'],
-  mesh: ['assets/fast/showcase/ironman-reference.glb.gz', root + display.heatModelFile],
-  uv: ['assets/fast/showcase/helmet-reference.glb.gz', root + display.showcaseUvImage]
- };
- for (const href of files[kind]) {
-  if (warmed.has(href)) continue;
-  warmed.add(href);
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.href = href;
-  link.as = href.endsWith('.webp') ? 'image' : 'fetch';
-  if (link.as === 'fetch') link.crossOrigin = 'anonymous';
-  document.head.append(link);
- }
-}
 function carousel(kind){const host=document.querySelector(kind==='animation'?'#feature-animation':kind==='mesh'?'#feature-heat':'#feature-uv'),controls=document.querySelector(`[data-carousel="${kind}"]`),card=host.closest('article'),status=card.querySelector('.switch-status');let index=-1,request=0,busy=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,visible=false,nextAt=Infinity;const pointers=new Set(),keys=new Set();scoreCard(card,decks[kind][0][0]);document.querySelector(`#${kind}-name`).textContent=decks[kind][0][1];const restart=()=>{nextAt=performance.now()+ROTATION_MS};const stage = card.querySelector('.feature-stage');
  let stageInView = false;
  function startLiveView() {
@@ -88,7 +67,7 @@ function carousel(kind){const host=document.querySelector(kind==='animation'?'#f
   nextAt = Infinity;
   card.setAttribute('aria-busy', 'true');
   status.hidden = true;
-  if (target === 0) warmFirstSlide(kind, id);
+  if (target === 0) window.preloadShowcase(kind);
   try {
    await loadViewer();
    if (stale()) return;

@@ -5,6 +5,31 @@ const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 rail.innerHTML=chapters.map(([name,,desc],i)=>`<button type="button" class="atlas-stage" data-chapter="${i}" aria-pressed="false" aria-controls="atlas-cases"><span class="chapter-icon">${icons[i].outerHTML}</span><span class="atlas-stage-label">${name}</span><span class="atlas-stage-detail">${desc}</span><span class="chapter-number">${String(i+1).padStart(2,'0')}</span></button>`).join('');
 const meshCards=['mesh-i2m-expert-03-v1','mesh-i2m-expert-59-v1','mesh-i2m-nailong-v1','mesh-i2m-expert-60-v1','mesh-i2m-expert-42-v1','mesh-i2m-vanguard-v1'];
 const animationCards=['animation-expert-10-v1','animation-expert-01-v1','animation-expert-13-v1','animation-ronin-stow-v1','animation-seraph-wing-deploy-v1','animation-expert-72-v1'];
+function cardPicture(id, fallback, name, reference = false) {
+ const base = 'assets/workflow/' + escape(id);
+ const sources = reference ? base + '.avif' : `${base}.avif, ${base}-2x.avif 2x`;
+ return `<picture><source type="image/avif" srcset="${sources}"><img${reference ? ' class="render-reference"' : ''} src="${escape(fallback)}" alt="${escape(name)}" loading="${reference ? 'eager' : 'lazy'}" decoding="async"></picture>`;
+}
+
+// A case with no optimized thumbnail can still display its original image.
+grid.addEventListener('error', event => {
+ if (event.target.matches('picture > img')) event.target.parentElement.querySelector('source')?.remove();
+}, true);
+
+function loadReference(card) {
+ const template = card?.querySelector('template');
+ if (!template) return;
+ const image = template.content.querySelector('img');
+ image.addEventListener('load', () => { card.querySelector('.atlas-case-image > span').hidden = false; }, {once: true});
+ template.replaceWith(template.content);
+}
+
+grid.addEventListener('pointerover', event => {
+ if (event.pointerType !== 'touch') loadReference(event.target.closest('.atlas-case'));
+});
+grid.addEventListener('focusin', event => {
+ if (event.target.matches(':focus-visible')) loadReference(event.target.closest('.atlas-case'));
+});
 let active=-1;
 function select(index){if(index===active)return;active=index;rail.querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));const [name,title,desc,filter]=chapters[index];const entries=window.GAMEATLAS_TOUR.map((c,i)=>({c,i}));
  const order=index===0?meshCards:index===3?animationCards:null;
@@ -12,9 +37,19 @@ function select(index){if(index===active)return;active=index;rail.querySelectorA
  const model=window.GAMEATLAS_CASE_DATA.models.find(m=>m.id===selected.model);
  const r={name:model.name,score:selected.submission ? window.GAMEATLAS_CASE_DATA.tasks[c.id][model.id].examples[0].score : window.GAMEATLAS_CASE_DATA.tasks[c.id][model.id].score};
  const cover=c.stage>=4?`case-assets/${model.id}/${c.id}/${selected.image}`:c.cardImage||'assets/cases/'+c.image;
- return `<button type="button" class="atlas-case ${index>=4?'atlas-case-scene':'atlas-case-object'}" data-atlas-case="${i}" style="--reveal-delay:${n*35}ms" aria-label="Explore ${escape(c.case)}"><div class="atlas-case-image"><img src="${escape(cover+(c.name==='UV'?'?v=textured1':''))}" alt="${escape(c.case)}" loading="lazy">${rendering?`<img class="render-reference" src="assets/card-renders/${escape(c.id)}-gt.webp" loading="lazy" alt=""><span>Ground truth</span>`:'<span>Explore ↗</span>'}</div><div class="atlas-case-copy"><div class="atlas-case-score">${modelIdentity(escape(r?.name||'Reference'))}<strong>${Number.isFinite(r?.score)?r.score.toFixed(1)+' <small>/ 100'+(selected.submission?' · Submission 1':'')+'</small>':'View reference'}</strong></div></div></button>`}).join('');}
+ return `<button type="button" class="atlas-case ${index>=4?'atlas-case-scene':'atlas-case-object'}" data-atlas-case="${i}" style="--reveal-delay:${n*35}ms" aria-label="Explore ${escape(c.case)}"><div class="atlas-case-image">${cardPicture(c.id, cover, c.case)}${rendering?`<template>${cardPicture(c.id+'-gt','assets/card-renders/'+c.id+'-gt.webp','',true)}</template><span hidden>Ground truth</span>`:'<span>Explore ↗</span>'}</div><div class="atlas-case-copy"><div class="atlas-case-score">${modelIdentity(escape(r?.name||'Reference'))}<strong>${Number.isFinite(r?.score)?r.score.toFixed(1)+' <small>/ 100'+(selected.submission?' · Submission 1':'')+'</small>':'View reference'}</strong></div></div></button>`}).join('');}
 grid.addEventListener('click',e=>{const b=e.target.closest('[data-atlas-case]');if(b&&grid.contains(b))window.openAtlasCase(+b.dataset.atlasCase,b,Array.from(grid.querySelectorAll("[data-atlas-case]"),item=>Number(item.dataset.atlasCase)))});
 rail.addEventListener('click',e=>{const b=e.target.closest('[data-chapter]');if(b)select(+b.dataset.chapter)});
 rail.addEventListener('keydown',e=>{const keys=['ArrowDown','ArrowRight','ArrowUp','ArrowLeft','Home','End'];if(!keys.includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?7:(active+(['ArrowDown','ArrowRight'].includes(e.key)?1:7))%8;select(next);rail.querySelectorAll('button')[next].focus()});
+function warmWorkflow() {
+ if (navigator.connection?.saveData) return;
+ for (const image of grid.querySelectorAll('.atlas-case-image img:not(.render-reference)')) {
+  image.loading = 'eager';
+ }
+}
+for (const link of document.querySelectorAll('a[href="#workflow-title"], a[href="#pipeline"]')) {
+ link.addEventListener('pointerenter', warmWorkflow, {once: true});
+ link.addEventListener('focus', warmWorkflow, {once: true});
+}
 select(0);
 })();

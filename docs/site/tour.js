@@ -2,8 +2,42 @@
 const cases=window.GAMEATLAS_TOUR,data=window.GAMEATLAS_CASE_DATA,dialog=document.querySelector('#case-dialog');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),num=v=>Number.isFinite(v)?v.toFixed(2):'—';
 const names={pose:'Pose & trajectory',constraints:'Contacts & support',temporal:'Temporal stability',form:'Form',silhouette:'Silhouette',structure:'Structure',detail:'Detail',continuity:'Surface continuity',distortion:'Distortion',density:'Texel density',coverage:'Atlas coverage',regularity:'Regularity',shape:'Shape preservation',gross:'Large-scale structure',parts:'Missing parts',bulk:'Volume',under:'Undersampling',messy:'Irregular topology',local:'Local detail',planar:'Planar surfaces',ngon:'Polygon structure',transform:'Transforms',integrity:'Mesh integrity',budget:'Triangle budget',center:'Object placement',object_integrity:'Object integrity',physical:'Physical relationships',rotation:'Orientation',delivery:'Delivery',translation:'Camera position',reprojection:'Frame alignment',focal:'Field of view',identity:'Layer identity',layout:'Layer placement',visibility:'Visibility',relations:'Layer relationships',visual_score:'Image similarity',rung_score:'Stage quality',validity:'Contract validity',geometry_defects:'Geometry defects',delivery_orientation:'Delivery orientation',frame_similarity_score:'Frame similarity',material_focus_score:'Material fidelity',transmission_highlight_score:'Transmission & highlights',stability_score:'Stability'};
-let index=0,model=data.models[0].id,version=0,api=null,opener=null,catalogPromise,rung=null,exampleIndex=0;
+let index=0,model=data.models[0].id,version=0,api=null,opener=null,rung=null,exampleIndex=0;
 const $=s=>dialog.querySelector(s),base=()=>`case-assets/${model}/${cases[index].id}/`,selected=()=>data.tasks[cases[index].id]?.[model]||{},label=id=>names[id]||id.replaceAll('_',' ');
+const catalogCache = new Map();
+const hinted = new Set();
+const viewerUrl = './vendor/public-viewer.js?v=live2';
+function taskCatalog(id) {
+ const dir = dialog.dataset.catalogDir;
+ const url = dir ? dir + '/' + id + '.json' : 'case-assets/catalog.json?v=taskavg23';
+ if (!catalogCache.has(url)) {
+  catalogCache.set(url, fetch(url).then(response => {
+   if (!response.ok) throw new Error('Could not load task evidence: ' + response.status);
+   return response.json();
+  }).catch(error => { catalogCache.delete(url); throw error; }));
+ }
+ return catalogCache.get(url);
+}
+// Hover and keyboard focus give the selected case a head start without fetching its models.
+const caseGrid = document.getElementById('atlas-cases');
+function warmCaseRecord(event) {
+ const card = event.target.closest('[data-atlas-case]');
+ if (!card || !dialog.dataset.catalogDir || navigator.connection?.saveData) return;
+ const task = cases[Number(card.dataset.atlasCase)];
+ if (task) taskCatalog(task.id).catch(() => {}); // A click can retry a failed hint.
+}
+caseGrid.addEventListener('pointerover', warmCaseRecord);
+caseGrid.addEventListener('focusin', warmCaseRecord);
+function hint(url, module = false) {
+ if (hinted.has(url)) return;
+ hinted.add(url);
+ const link = document.createElement('link');
+ link.rel = module ? 'modulepreload' : 'preload';
+ if (!module) link.as = 'fetch';
+ link.crossOrigin = 'anonymous';
+ link.href = url;
+ document.head.append(link);
+}
 function stop(){version++;api?.dispose();api=null;dialog.querySelectorAll('video').forEach(v=>v.pause())}
 function empty(host,title,detail=''){host.innerHTML=`<div class="detail-empty">${esc(title)}${detail?`<small>${esc(detail)}</small>`:''}</div>`}
 function image(host,url,alt){host.replaceChildren();const img=new Image();img.alt=alt;img.src=url;img.onerror=()=>empty(host,'Preview unavailable','Please try again.');host.append(img)}
@@ -24,8 +58,14 @@ function evaluation(e){if(!e){$('.detail-report').innerHTML=`<p class="detail-ru
 function modelButtons(){const s=cases[index];$('.detail-models').innerHTML=data.models.map(m=>`<button data-model="${esc(m.id)}" aria-pressed="${model===m.id}">${modelIdentity(esc(m.name))}<b>${num(data.tasks[s.id]?.[m.id]?.examples?.[model===m.id ? exampleIndex : 0]?.score ?? (model===m.id ? selected().score : data.tasks[s.id]?.[m.id]?.score))}</b></button>`).join('');$('.detail-models').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(model===b.dataset.model)return;model=b.dataset.model;exampleIndex=0;rung=null;modelButtons();score();media()});}
 async function media(){stop();const v=version,s=cases[index],left=$('#input-media'),right=$('#output-media'),stale=()=>v!==version||!dialog.open;left.removeAttribute('title');right.removeAttribute('title');$('.detail-controls').replaceChildren();$('#input-views').replaceChildren();$('#output-views').replaceChildren();left.innerHTML=right.innerHTML='<span class="detail-loading">Preparing preview</span>';$('.detail-caption').textContent='';$('.detail-report').innerHTML='<p class="detail-rule">Loading evaluation evidence…</p>';
  try{
- catalogPromise??=fetch('case-assets/catalog.json?v=taskavg23').then(r=>{if(!r.ok)throw Error();return r.json()}).catch(error=>{catalogPromise=null;throw error});
- const catalog=await catalogPromise;if(stale())return;
+ // Request the viewer and known delivery alongside the detailed scoring record.
+ if (s.stage < 4) {
+  hint(viewerUrl, true);
+  if (s.name !== 'UV' && s.display.model === model && s.display.modelFile) {
+   hint(base() + s.display.modelFile);
+  }
+ }
+ const catalog=await taskCatalog(s.id);if(stale())return;
  const record=catalog.find(x=>x.model===model&&x.task===s.id)||{},path=base(),refbase=`case-assets/references/${s.id}/`;
  const samples=selected().examples || [];
  const sample=samples[exampleIndex];
@@ -63,7 +103,7 @@ async function media(){stop();const v=version,s=cases[index],left=$('#input-medi
   if(active.uvImage)image(right,path+active.uvImage,'Submitted UV layout');
   else empty(right,'UV layout unavailable');
  }else if(!output){if(active.image)image(right,path+active.image,'Model delivery');else if(!record.motion)empty(right,Number.isFinite(selected().score)?'No viewable delivery':'Run in progress',Number.isFinite(selected().score)?'The recorded score is retained.':'The artifact will appear after this run completes.');}
- if(input){const name=input.split('/').pop();if(['retopo-003-input.glb','case-4-reference.glb','mesh-retopo-004-r04-input.glb'].includes(name))input='case-assets/shared/'+name+'.gz';}if(input||output||animation){const m=await import('./vendor/public-viewer.js?v=live2');if(stale())return;const mounted=await m.pair({left,right,input,output,animation,id:s.id,motion:record.motion?path+record.motion:null,stale,onTime:f=>{const timeline=$('#detail-timeline');if(timeline)timeline.value=Math.round(f*1000)}});if(stale()){mounted?.dispose();return;}api=mounted;}
+ if(input){const name=input.split('/').pop();if(['retopo-003-input.glb','case-4-reference.glb','mesh-retopo-004-r04-input.glb'].includes(name))input='case-assets/shared/'+name+'.gz';}if(input||output||animation){const m=await import(viewerUrl);if(stale())return;const mounted=await m.pair({left,right,input,output,animation,id:s.id,motion:record.motion?path+record.motion:null,stale,onTime:f=>{const timeline=$('#detail-timeline');if(timeline)timeline.value=Math.round(f*1000)}});if(stale()){mounted?.dispose();return;}api=mounted;}
  if(api){
   if(api.referenceColors){$('#delivery-note').textContent='Reference-colored preview';$('#delivery-note').title='Ground-truth colors mapped onto the submitted geometry for display.';}
   if (retopo) api.material('wire');

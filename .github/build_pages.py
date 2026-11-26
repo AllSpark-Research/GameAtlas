@@ -1,6 +1,7 @@
 """Build the self-contained GameAtlas project website with Python's standard library."""
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import re
 import shutil
@@ -43,6 +44,26 @@ def bundle(section, tag_pattern, extension, site):
     return adjacent.sub(replace, section)
 
 
+def write_case_catalogs(site):
+    """Keep the source catalog authoritative, while serving only the selected task."""
+    assets = site / "case-assets"
+    catalog = (assets / "catalog.json").read_bytes()
+    version = hashlib.sha256(catalog).hexdigest()[:12]
+    directory = assets / "catalog" / version
+    directory.mkdir(parents=True)
+    tasks = {}
+    for row in json.loads(catalog):
+        task = row["task"]
+        if not re.fullmatch(r"[a-zA-Z0-9_-]+", task):
+            raise ValueError(f"Invalid case catalog task: {task!r}")
+        tasks.setdefault(task, []).append(row)
+    for task, records in tasks.items():
+        (directory / f"{task}.json").write_text(
+            json.dumps(records, separators=(",", ":"), ensure_ascii=False), encoding="utf-8"
+        )
+    return directory.relative_to(site).as_posix()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path, help="New directory for the published site")
@@ -53,6 +74,8 @@ def main():
     shutil.copytree(source, output)
     index = output / "index.html"
     html = index.read_text(encoding="utf-8")
+    catalogs = write_case_catalogs(output)
+    html = html.replace('id="case-dialog"', f'id="case-dialog" data-catalog-dir="{catalogs}"', 1)
     head, body = html.split("</head>", 1)
     # The classic startup scripts run before the module that wires up the
     # interactive viewers. Keep that module and any subsequent tags intact.
