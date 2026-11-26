@@ -1,0 +1,32 @@
+{
+  "run_id": "scores-09",
+  "snapshot": "2026-11-18 16:08 CST",
+  "scores": {
+    "claude-opus-5-5": {
+      "sponza-reference-render-ladder-v2-threejs": {
+        "score": 35.0752,
+        "first": null,
+        "run": 2,
+        "kind": "measured"
+      },
+      "sponza-reference-render-ladder-v2": {
+        "score": 7.7575,
+        "first": null,
+        "run": 2,
+        "kind": "measured"
+      },
+      "sceneactbench-layout-localpool-banana-replicacad-apt-1": {
+        "score": 91.22637608427796,
+        "first": 91.2264,
+        "run": 2,
+        "kind": "measured"
+      },
+      "mesh-i2m-scorpio-v1": {
+        "score": 46.690865409822074,
+        "first": 46.6909,
+        "run": 2,
+        "kind": "measured"
+      }
+    }
+  }
+}

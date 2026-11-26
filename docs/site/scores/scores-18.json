@@ -1,0 +1,19 @@
+{
+  "run_id": "scores-18",
+  "scores": {
+    "claude-opus-5-5": {
+      "sceneactbench-layout-localpool-banana-hssd-105515151-173104068": {
+        "score": 98.13755578552009,
+        "first": 97.8801,
+        "run": 3,
+        "kind": "measured"
+      },
+      "sceneactbench-layout-localpool-banana-hssd-105515160-173104077": {
+        "score": 97.86355880618652,
+        "first": 97.86359999999999,
+        "run": 3,
+        "kind": "measured"
+      }
+    }
+  }
+}

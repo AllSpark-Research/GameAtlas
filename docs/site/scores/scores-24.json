@@ -1,0 +1,16 @@
+{
+  "run_id": "scores-24",
+  "snapshot": "2026-11-20 CST",
+  "scores": {
+    "claude-opus-5-5": {
+      "sponza-reference-render-ladder-v2": {
+        "run": 1,
+        "repeat": 5,
+        "first": 22.3123,
+        "score": 35.6576,
+        "kind": "measured",
+        "terminal": "AGENT_TIMEOUT"
+      }
+    }
+  }
+}

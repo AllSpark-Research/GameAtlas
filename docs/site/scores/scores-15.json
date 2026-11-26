@@ -1,0 +1,13 @@
+{
+  "run_id": "scores-15",
+  "scores": {
+    "claude-opus-5-5": {
+      "sceneactbench-layout-localpool-banana-replicacad-apt-2": {
+        "score": 86.9962764875636,
+        "first": 86.9962764875636,
+        "run": 2,
+        "kind": "measured"
+      }
+    }
+  }
+}

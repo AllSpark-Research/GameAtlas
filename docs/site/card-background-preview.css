@@ -1,0 +1,51 @@
+.feature-stage::before {
+  background:
+    radial-gradient(ellipse 70% 44% at 50% 78%, #d5e2f16b, transparent 100%),
+    linear-gradient(180deg, transparent 42%, #e8eff752 72%, #e8eff766);
+}
+
+#pipeline .atlas-case-object,
+#pipeline .atlas-case-object .atlas-case-image {
+  background: transparent;
+}
+
+#pipeline .atlas-case-object .atlas-case-copy {
+  background: #fff;
+}
+
+/* Reserve the same title slot for every slide so navigation stays under the pointer. */
+.feature-card .carousel-controls[data-carousel] {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 7rem) 25px 20px;
+  width: calc(7rem + 70px + 3 * 0.4rem);
+  max-width: 100%;
+  align-items: center;
+  min-width: 0;
+}
+.feature-card .carousel-controls[data-carousel] .case-title {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#atlas-browser .render-reference {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+#atlas-browser .atlas-case:focus-visible .render-reference { opacity: 1; }
+@media (hover: hover) {
+  #atlas-browser .atlas-case:hover .render-reference { opacity: 1; }
+}
+
+.feature-card:not([data-interactive="true"]) .preview-tools {
+  visibility: hidden;
+}
+.feature-card:not([data-interactive="true"]) .feature-view {
+  visibility: hidden;
+}
+.behavior-panel:empty { min-height: min(40vw, 550px); }
