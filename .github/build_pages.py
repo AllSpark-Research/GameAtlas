@@ -34,11 +34,13 @@ def bundle(section, tag_pattern, extension, site):
         # prevents two JS expressions from being joined by automatic insertion.
         separator = "\n;\n" if extension == "js" else "\n"
         content = (separator.join(pieces) + "\n").encode("utf-8")
+        if extension == "css":
+            # The site is a single page. Ship the styles with the HTML so layout
+            # and viewport-dependent requests can start without a stylesheet round trip.
+            return "<style>" + content.decode("utf-8") + "</style>"
         digest = hashlib.sha256(content).hexdigest()[:16]
         name = f"gameatlas-{digest}.{extension}"
         (site / name).write_bytes(content)
-        if extension == "css":
-            return f'<link rel="stylesheet" href="{name}">'
         return f'<script defer src="{name}"></script>'
 
     return adjacent.sub(replace, section)

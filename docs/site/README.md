@@ -10,4 +10,4 @@ python3 .github/build_pages.py "$site_dir"
 python3 -m http.server 8000 --directory "$site_dir"
 ```
 
-Open [localhost:8000](http://localhost:8000/). All website assets are served from that directory. The build bundles the homepage styles and startup scripts into content-hashed files. GitHub Pages publishes this build when the website changes on the public repository's `main` branch.
+Open [localhost:8000](http://localhost:8000/). All website assets are served from that directory. The build embeds the shared styles in the HTML and bundles startup scripts into a content-hashed file. GitHub Pages publishes this build when the website changes on the public repository's `main` branch.
